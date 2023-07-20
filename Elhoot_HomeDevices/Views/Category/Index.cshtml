@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Elhoot_HomeDevices.Data.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>المخزن </h1>
+
+<p>
+    <a asp-action="Creat">اضافه منتج جديد</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Count)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Count)
+                </td>
+            <td>
+                    <a asp-action="Update" asp-route-id="@item.Id">تعديل</a> 
+                 
+                <a asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
