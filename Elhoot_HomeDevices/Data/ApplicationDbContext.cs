@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Elhoot_HomeDevices.Data
 {
@@ -35,6 +36,7 @@ namespace Elhoot_HomeDevices.Data
         public string Name { get; set; }
 
         public string Description { get; set; }
+        public int Count { get; set; }
     }
 
     public class Product
@@ -54,10 +56,11 @@ namespace Elhoot_HomeDevices.Data
         public string ImageUrl { get; set; }
 
         [Required]
+        [ForeignKey("CategoryId")]
         public int CategoryId { get; set; }
 
-        [ForeignKey("CategoryId")]
-        public Category Category { get; set; }
+        
+        public Category? Category { get; set; }
     }
 
     public class Customer
