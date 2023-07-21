@@ -50,8 +50,12 @@ namespace Elhoot_HomeDevices.Controllers
                 if (category != null)
                 {
                     // Increment the Count property in Category
-                    category.Count++;
-                    _context.Entry(category).State = EntityState.Modified;
+                    if (category.Count == 0)
+                    {
+                        category.Count++;
+
+                        _context.Entry(category).State = EntityState.Modified;
+                    }
 
 
                     // Save changes to the database
@@ -79,16 +83,31 @@ namespace Elhoot_HomeDevices.Controllers
         // GET: ProductController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            ViewBag.Catogeryname = _context.Categories.ToList();
+            var pro = _context.Products.FirstOrDefault(or => or.Id == id);
+            return View(pro);
         }
 
         // POST: ProductController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Product prod)
         {
+            ViewBag.Catogeryname = _context.Categories.ToList();
             try
             {
+                var pro = _context.Products.FirstOrDefault(or => or.Id == id);
+                if (pro != null)
+                {   pro.Price = prod.Price;
+                    pro.Description = prod.Description;
+                    pro.CategoryId = prod.CategoryId;
+                    pro.Description= prod.Description;
+                    pro.Name= prod.Name;    
+                    pro.ImageUrl= prod.ImageUrl;
+                  
+                    
+                    _context.SaveChanges();
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -98,18 +117,23 @@ namespace Elhoot_HomeDevices.Controllers
         }
 
         // GET: ProductController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+     
 
         // POST: ProductController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        
+        public ActionResult Delete(int id )
         {
             try
             {
+              var prod=_context.Products.FirstOrDefault(pro=>pro.Id == id);
+                _context.Products.Remove(prod);
+                var category = _context.Categories.Find(prod.CategoryId);
+                if (category != null)
+                {
+                    category.Count--;
+                    _context.Entry(category).State = EntityState.Modified;
+                    _context.SaveChanges();
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch

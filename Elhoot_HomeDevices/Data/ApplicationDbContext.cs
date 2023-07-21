@@ -86,11 +86,11 @@ namespace Elhoot_HomeDevices.Data
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public int CustomerId { get; set; }
+       // [Required]
+       // public int CustomerId { get; set; }
 
-        [ForeignKey("CustomerId")]
-        public Customer Customer { get; set; }
+        //[ForeignKey("CustomerId")]
+        public string? Custoname { get; set; }
 
         [Required]
         public DateTime OrderDate { get; set; }
