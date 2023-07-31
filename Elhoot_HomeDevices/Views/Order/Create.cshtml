@@ -1,0 +1,80 @@
+﻿@model Elhoot_HomeDevices.Data.Order
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1> @ViewBag.CustomerName</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="productNmae" class="control-label"></label>
+                <input asp-for="productNmae" class="form-control" />
+                <span asp-validation-for="productNmae" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AllPrice" class="control-label"></label>
+                <input asp-for="AllPrice" class="form-control" />
+                <span asp-validation-for="AllPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PayedPrice" class="control-label"></label>
+                <input asp-for="PayedPrice" class="form-control" />
+                <span asp-validation-for="PayedPrice" class="text-danger"></span>
+            </div>
+           @* <div class="form-group">
+                <label asp-for="RestPrice" class="control-label"></label>
+                <input asp-for="RestPrice" class="form-control" />
+                <span asp-validation-for="RestPrice" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Penfits" class="control-label"></label>
+                <input asp-for="Penfits" class="form-control" />
+                <span asp-validation-for="Penfits" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="PriceAfterBenfits" class="control-label"></label>
+                <input asp-for="PriceAfterBenfits" class="form-control" />
+                <span asp-validation-for="PriceAfterBenfits" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Peroid" class="control-label"></label>
+                <input asp-for="Peroid" class="form-control" />
+                <span asp-validation-for="Peroid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Startdate" class="control-label"></label>
+                <input asp-for="Startdate" class="form-control" />
+                <span asp-validation-for="Startdate" class="text-danger"></span>
+            </div>
+           @* <div class="form-group">
+                <label asp-for="Enddate" class="control-label"></label>
+                <input asp-for="Enddate" class="form-control" />
+                <span asp-validation-for="Enddate" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Total" class="control-label"></label>
+                <input asp-for="Total" class="form-control" />
+                <span asp-validation-for="Total" class="text-danger"></span>
+            </div>
+          
+            <input type="hidden" asp-for="CustomerId" />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

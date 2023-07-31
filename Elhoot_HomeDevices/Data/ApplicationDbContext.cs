@@ -34,11 +34,9 @@ namespace Elhoot_HomeDevices.Data
 
         [Required]
         public string Name { get; set; }
-
-        public string Description { get; set; }
-        public int Count { get; set; }
+         public decimal Totalprice { get; set; }
+       
     }
-
     public class Product
     {
         [Key]
@@ -47,13 +45,13 @@ namespace Elhoot_HomeDevices.Data
         [Required]
         public string Name { get; set; }
 
-        public string Description { get; set; }
+        public int Count { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
 
-        public string ImageUrl { get; set; }
+        
 
         [Required]
         [ForeignKey("CategoryId")]
@@ -71,12 +69,13 @@ namespace Elhoot_HomeDevices.Data
         [Required]
         public string Name { get; set; }
 
-        [Required]
+        //[Required]
         [EmailAddress]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         public string Address { get; set; }
-
+        public int Sequance { get; set; }    
+        public ICollection<Order>? Orders { get; set; }
         [Phone]
         public string Phone { get; set; }
     }
@@ -86,20 +85,29 @@ namespace Elhoot_HomeDevices.Data
         [Key]
         public int Id { get; set; }
 
-       // [Required]
-       // public int CustomerId { get; set; }
-
-        //[ForeignKey("CustomerId")]
-        public string? Custoname { get; set; }
-
         [Required]
-        public DateTime OrderDate { get; set; }
+        public int CustomerId { get; set; }
+
+        [ForeignKey("CustomerId")]
+        public string? productNmae { get; set; }
+        public decimal AllPrice { get; set; }
+        public decimal PayedPrice { get; set; }
+        public decimal RestPrice { get; set; }
+        public decimal Penfits { get; set; }
+        public decimal PriceAfterBenfits { get; set; }
+        public decimal Peroid { get; set; }
+
+        public Customer? Customer { get; set; }  
+        [Required]
+        public DateTime Startdate { get; set; }
+        public DateTime Enddate { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Total { get; set; }
+        
 
-        public string Status { get; set; }
+      //  public string Status { get; set; }
     }
 
     public class OrderItem
@@ -126,6 +134,9 @@ namespace Elhoot_HomeDevices.Data
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
+
+       
+    }
     }
 
-}
+

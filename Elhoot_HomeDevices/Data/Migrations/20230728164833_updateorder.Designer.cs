@@ -4,6 +4,7 @@ using Elhoot_HomeDevices.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Elhoot_HomeDevices.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230728164833_updateorder")]
+    partial class updateorder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,9 +68,6 @@ namespace Elhoot_HomeDevices.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Sequance")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
@@ -83,9 +83,6 @@ namespace Elhoot_HomeDevices.Data.Migrations
 
                     b.Property<decimal>("AllPrice")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("Enddate")
                         .HasColumnType("datetime2");
@@ -108,6 +105,10 @@ namespace Elhoot_HomeDevices.Data.Migrations
                     b.Property<DateTime>("Startdate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18, 2)");
 
@@ -115,8 +116,6 @@ namespace Elhoot_HomeDevices.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
@@ -380,17 +379,6 @@ namespace Elhoot_HomeDevices.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Elhoot_HomeDevices.Data.Order", b =>
-                {
-                    b.HasOne("Elhoot_HomeDevices.Data.Customer", "Customer")
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-                });
-
             modelBuilder.Entity("Elhoot_HomeDevices.Data.OrderItem", b =>
                 {
                     b.HasOne("Elhoot_HomeDevices.Data.Order", "Order")
@@ -470,11 +458,6 @@ namespace Elhoot_HomeDevices.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Elhoot_HomeDevices.Data.Customer", b =>
-                {
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

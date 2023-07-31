@@ -1,5 +1,7 @@
 ﻿using Elhoot_HomeDevices.Data;
+using Elhoot_HomeDevices.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Elhoot_HomeDevices.Controllers
 {
@@ -12,7 +14,12 @@ namespace Elhoot_HomeDevices.Controllers
 
         public IActionResult Index()
         {
+
             var result = _context.Categories.ToList();
+
+            decimal totla =+ result.Sum(c => c.Totalprice);
+            decimal totalAllCategoriesPrice = _context.Products.Sum(p => p.Price * p.Count);
+            ViewBag.totalprice = totalAllCategoriesPrice;
             return View(result);
         }
         public IActionResult Creat ()
@@ -61,6 +68,32 @@ namespace Elhoot_HomeDevices.Controllers
                 return RedirectToAction("Index");
             }
             return View(category);
+        }
+
+        public IActionResult Details(int Id)
+        {
+
+            var cat = _context.Categories.Find(Id);
+            if (ModelState.IsValid)
+            {
+
+                if (cat == null)
+                {
+                    return NotFound();
+                }
+
+                decimal totalprice = _context.Products.Where(p => p.CategoryId == Id).Sum(p => p.Price);
+                var prodct = _context.Products.Where(p => p.CategoryId == Id).ToList();
+
+                var ViewModel = new CategoryWithProductsViewModel
+                {
+                    category = cat,
+                    products = prodct
+                };
+                return View(ViewModel);
+            }
+            return View();
+           
         }
     }
 }

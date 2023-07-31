@@ -1,0 +1,48 @@
+﻿@model Elhoot_HomeDevices.ViewModels.CategoryWithProductsViewModel;
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>المنتاجات</h1>
+<div>
+    <a asp-action="CreateForCategory" asp-route-categoryId="@Model.category.Id">Add Product</a>
+</div>
+
+
+    <h4>Category</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.category.Name)
+        </dt>
+        
+    </dl>
+    <table>
+        <thead>
+            <tr>
+             
+               
+                <th>Product Name</th>
+                <th>Product count</th>
+                <th>Product Price</th>
+            </tr>
+              
+        </thead>
+        <tbody>
+            @foreach (var product in Model.products)
+            {
+                <tr>
+                    
+                    <td>@product.Name</td>
+                    <td>@product.Count</td>
+                    <td>@product.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+<div>
+  
+    <a asp-action="Index">Back to List</a>
+</div>

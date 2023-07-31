@@ -20,3 +20,24 @@ html {
 body {
   margin-bottom: 60px;
 }
+S for horizontal table layout */
+.table-container {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .table th,
+    .table td {
+        text-align: center;
+        padding: 8px;
+        border: 1px solid #ddd;
+    }
+
+    /* Optional: To add some styling to the table header row */
+    .table thead tr {
+        background-color: #f2f2f2;
+    }

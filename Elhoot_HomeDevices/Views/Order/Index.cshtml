@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Elhoot_HomeDevices.Data.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1> @TempData["customername"]</h1>
+
+<p>
+    <a asp-action="Create" asp-route-customername="@TempData["customername"]" class="btn btn-primary">Create New</a>
+</p>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr class="table-primary"> 
+                <th>
+                    @Html.DisplayNameFor(model => model.productNmae)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AllPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PayedPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RestPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Penfits)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PriceAfterBenfits)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Peroid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Startdate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Enddate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                 
+                <tr class="table-danger"> 
+                 
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.productNmae)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AllPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PayedPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RestPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Penfits)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PriceAfterBenfits)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Peroid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Startdate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Enddate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
