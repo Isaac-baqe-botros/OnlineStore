@@ -1,0 +1,32 @@
+﻿@model IEnumerable< Elhoot_HomeDevices.Data.Order>
+
+<!-- ... existing code ... -->
+
+@*<tr class="table-primary">
+   @foreach(var item in Model)
+    {
+     <lable>@item.Startdate</lable>   
+    }
+</tr>*@
+<h1>partail view</h1>
+ @foreach(var item in Model)
+{
+    @if (item.DatesInRange != null)
+    {
+        <h4>Dates in Range:</h4>
+        <div>
+            @for (int i = 0; i < item.DatesInRange.Count; i++)
+            {
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" asp-for="@item.DatesInRange[i]" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@item.DatesInRange[i]">@item.DatesInRange[i]</label>
+                </div>
+            }
+        </div>
+    }
+}
+  
+ 
+ 
+
+<!-- ... existing code ... -->

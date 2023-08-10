@@ -4,6 +4,7 @@ using Elhoot_HomeDevices.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Elhoot_HomeDevices.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230731155003_updateproduct1")]
+    partial class updateproduct1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,61 +76,6 @@ namespace Elhoot_HomeDevices.Data.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Elhoot_HomeDevices.Data.Dayeenatey", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Money")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Pienfits")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("date")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("dayeenateys");
-                });
-
-            modelBuilder.Entity("Elhoot_HomeDevices.Data.Madunaate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CountMonth")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Money")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Pienfits")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("date")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("madunaates");
-                });
-
             modelBuilder.Entity("Elhoot_HomeDevices.Data.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -139,9 +87,6 @@ namespace Elhoot_HomeDevices.Data.Migrations
                     b.Property<decimal>("AllPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
@@ -150,9 +95,6 @@ namespace Elhoot_HomeDevices.Data.Migrations
 
                     b.Property<decimal>("PayedPrice")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("PayerTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("Penfits")
                         .HasColumnType("decimal(18,2)");
@@ -163,14 +105,14 @@ namespace Elhoot_HomeDevices.Data.Migrations
                     b.Property<decimal>("PriceAfterBenfits")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("PriceAfterpermonth")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<decimal>("RestPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("Startdate")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("productNmae")
                         .HasColumnType("nvarchar(max)");
@@ -240,76 +182,6 @@ namespace Elhoot_HomeDevices.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("Elhoot_HomeDevices.Data.SelectedDate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateFree")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsSelected")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("MadunaateId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MadunatID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Paypalce")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MadunaateId");
-
-                    b.ToTable("SelectedDates");
-                });
-
-            modelBuilder.Entity("Elhoot_HomeDevices.Data.StoreDate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateFree")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsSelected")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Paypalce")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Statuse")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("storeDates");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -555,26 +427,6 @@ namespace Elhoot_HomeDevices.Data.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Elhoot_HomeDevices.Data.SelectedDate", b =>
-                {
-                    b.HasOne("Elhoot_HomeDevices.Data.Madunaate", "Madunaate")
-                        .WithMany("selectedDatesRange")
-                        .HasForeignKey("MadunaateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Madunaate");
-                });
-
-            modelBuilder.Entity("Elhoot_HomeDevices.Data.StoreDate", b =>
-                {
-                    b.HasOne("Elhoot_HomeDevices.Data.Order", null)
-                        .WithMany("DatesInRange")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -629,16 +481,6 @@ namespace Elhoot_HomeDevices.Data.Migrations
             modelBuilder.Entity("Elhoot_HomeDevices.Data.Customer", b =>
                 {
                     b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("Elhoot_HomeDevices.Data.Madunaate", b =>
-                {
-                    b.Navigation("selectedDatesRange");
-                });
-
-            modelBuilder.Entity("Elhoot_HomeDevices.Data.Order", b =>
-                {
-                    b.Navigation("DatesInRange");
                 });
 #pragma warning restore 612, 618
         }

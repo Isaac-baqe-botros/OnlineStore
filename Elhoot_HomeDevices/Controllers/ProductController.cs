@@ -35,6 +35,7 @@ namespace Elhoot_HomeDevices.Controllers
             var cat =_context.Categories.Find(categoryId);
             TempData["name"] = CatName;
             var Prods = _context.Products.Where(p => p.CategoryId == categoryId).OrderBy(p=>p.Name);
+             
             decimal totalPrice = Prods.Sum(p => p.Price * p.Count);
             cat.Totalprice=totalPrice;
             ViewBag.TotalPrice = totalPrice;
@@ -94,10 +95,10 @@ namespace Elhoot_HomeDevices.Controllers
             var cat = _context.Categories.Find(product.CategoryId);
             if (ModelState.IsValid)
             {
+                product.TotalPriceCount = product.Count * product.Price;
 
-                    
-                    // Save changes to the database
-                    _context.Products.Add(product);
+                // Save changes to the database
+                _context.Products.Add(product);
                     await _context.SaveChangesAsync();
 
                 return RedirectToAction("Index", "Product", new { categoryId = product.CategoryId, CatName =cat.Name });
@@ -144,7 +145,8 @@ namespace Elhoot_HomeDevices.Controllers
                     pro.Count = prod.Count;
                     pro.CategoryId = prod.CategoryId;
                     pro.Count = prod.Count;
-                    pro.Name= prod.Name;    
+                    pro.Name= prod.Name;
+                    pro.TotalPriceCount = prod.Count * prod.Price;
                  
                   
                     

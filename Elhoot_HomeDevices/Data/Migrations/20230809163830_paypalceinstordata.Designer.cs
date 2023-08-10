@@ -4,6 +4,7 @@ using Elhoot_HomeDevices.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Elhoot_HomeDevices.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230809163830_paypalceinstordata")]
+    partial class paypalceinstordata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,9 +109,6 @@ namespace Elhoot_HomeDevices.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CountMonth")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("Money")
                         .HasColumnType("decimal(18,2)");
@@ -253,28 +253,15 @@ namespace Elhoot_HomeDevices.Data.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateFree")
-                        .HasColumnType("datetime2");
-
                     b.Property<bool>("IsSelected")
                         .HasColumnType("bit");
 
-                    b.Property<int>("MadunaateId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
-
-                    b.Property<int>("MadunatID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Paypalce")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MadunaateId");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("SelectedDates");
                 });
@@ -557,13 +544,13 @@ namespace Elhoot_HomeDevices.Data.Migrations
 
             modelBuilder.Entity("Elhoot_HomeDevices.Data.SelectedDate", b =>
                 {
-                    b.HasOne("Elhoot_HomeDevices.Data.Madunaate", "Madunaate")
-                        .WithMany("selectedDatesRange")
-                        .HasForeignKey("MadunaateId")
+                    b.HasOne("Elhoot_HomeDevices.Data.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Madunaate");
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Elhoot_HomeDevices.Data.StoreDate", b =>
@@ -629,11 +616,6 @@ namespace Elhoot_HomeDevices.Data.Migrations
             modelBuilder.Entity("Elhoot_HomeDevices.Data.Customer", b =>
                 {
                     b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("Elhoot_HomeDevices.Data.Madunaate", b =>
-                {
-                    b.Navigation("selectedDatesRange");
                 });
 
             modelBuilder.Entity("Elhoot_HomeDevices.Data.Order", b =>

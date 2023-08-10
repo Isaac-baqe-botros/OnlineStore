@@ -1,17 +1,23 @@
 ﻿@model Elhoot_HomeDevices.Data.Order
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1> @ViewBag.CustomerName</h1>
+<h1>Edite</h1>
 
 <h4>Order</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreatOrder">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            @*<div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>*@
             <div class="form-group">
                 <label asp-for="productNmae" class="control-label"></label>
                 <input asp-for="productNmae" class="form-control" />
@@ -37,7 +43,7 @@
                 <input asp-for="Penfits" class="form-control" />
                 <span asp-validation-for="Penfits" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
+           @* <div class="form-group">
                 <label asp-for="PriceAfterBenfits" class="control-label"></label>
                 <input asp-for="PriceAfterBenfits" class="form-control" />
                 <span asp-validation-for="PriceAfterBenfits" class="text-danger"></span>
@@ -48,7 +54,7 @@
                 <span asp-validation-for="Peroid" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PayerTime" class="control-label"></label>
+               <label asp-for="PayerTime" class="control-label"></label>
                 <input asp-for="PayerTime" class="form-control" />
                 <span asp-validation-for="PayerTime" class="text-danger"></span>
             </div>
@@ -57,20 +63,14 @@
                 <input asp-for="Startdate" class="form-control" />
                 <span asp-validation-for="Startdate" class="text-danger"></span>
             </div>
-           @* <div class="form-group">
-                <label asp-for="Enddate" class="control-label"></label>
-                <input asp-for="Enddate" class="form-control" />
-                <span asp-validation-for="Enddate" class="text-danger"></span>
-            </div>*@
+            
             <div class="form-group">
                 <label asp-for="Comment" class="control-label"></label>
                 <input asp-for="Comment" class="form-control" />
                 <span asp-validation-for="Comment" class="text-danger"></span>
             </div>
-          
-            <input type="hidden" asp-for="CustomerId" />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

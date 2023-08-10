@@ -9,7 +9,7 @@
 
 <p>
     <h1>@TempData["Name"]</h1>
-    <a asp-action="CreateForCategory" asp-route-Catname="@TempData["Name"]">Create New</a>
+    <a asp-action="CreateForCategory" asp-route-Catname="@TempData["Name"]" style="text-decoration: none; font-weight: bold; background-color: seagreen; color: white; padding: 8px 16px; border-radius: 4px;">اضافه منتج جديد</a>
 </p>
 <table class="table">
     <thead>
@@ -23,8 +23,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-           
-            
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPriceCount)
+            </th>
+
+
             <th></th>
         </tr>
     </thead>
@@ -40,11 +43,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-           
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPriceCount)
+                </td>
+
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">تعديل</a> 
+              @*  <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id">حذف</a>*@
             </td>
         </tr>
 }

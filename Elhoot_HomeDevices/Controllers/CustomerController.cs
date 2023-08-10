@@ -1,5 +1,6 @@
 ﻿using Elhoot_HomeDevices.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Elhoot_HomeDevices.Controllers
 {
@@ -13,6 +14,8 @@ namespace Elhoot_HomeDevices.Controllers
         public IActionResult Index()
         {
             var Custom = _context.Customers.OrderBy(c => c.Name).ToList();
+            decimal result= _context.Orders.Sum(o => o.PriceAfterBenfits);
+            ViewBag.result = result;
             return View(Custom);
         }
         public IActionResult Create(Customer customer)

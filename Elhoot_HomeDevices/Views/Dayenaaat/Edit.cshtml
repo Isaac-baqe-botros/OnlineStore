@@ -1,14 +1,12 @@
-﻿@model Elhoot_HomeDevices.Data.Product
+﻿@model Elhoot_HomeDevices.Data.Dayeenatey
 
 @{
     ViewData["Title"] = "Edit";
-
-    SelectList selectListItems = new SelectList(ViewBag.Catogeryname, "Id", "Name");
 }
 
 <h1>Edit</h1>
 
-<h4>Product</h4>
+<h4>Madunaate</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -21,21 +19,20 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Count" class="control-label"></label>
-                <input asp-for="Count" class="form-control" />
-                <span asp-validation-for="Count" class="text-danger"></span>
+                <label asp-for="Money" class="control-label"></label>
+                <input asp-for="Money" class="form-control" />
+                <span asp-validation-for="Money" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+                <label asp-for="date" class="control-label"></label>
+                <input asp-for="date" class="form-control" />
+                <span asp-validation-for="date" class="text-danger"></span>
             </div>
-
-            <div>
-                @* Add a hidden field to retain the CategoryId *@
-                <input type="hidden" asp-for="CategoryId" />
+            <div class="form-group">
+                <label asp-for="Pienfits" class="control-label"></label>
+                <input asp-for="Pienfits" class="form-control" />
+                <span asp-validation-for="Pienfits" class="text-danger"></span>
             </div>
-           
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -44,7 +41,7 @@
 </div>
 
 <div>
-    <a asp-action="Index" asp-route-categoryId="@Model.CategoryId" asp-route-CatName="@Model.Category.Name">Back to List</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

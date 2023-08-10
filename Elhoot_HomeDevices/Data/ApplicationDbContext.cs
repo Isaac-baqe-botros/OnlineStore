@@ -23,9 +23,28 @@ namespace Elhoot_HomeDevices.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<StoreDate> storeDates { get; set; }
+
+        public DbSet<SelectedDate> SelectedDates { get; set; }
+        public DbSet<Madunaate> madunaates { get; set; }
+        public DbSet<Dayeenatey> dayeenateys { get; set; }
 
     }
+    public class SelectedDate
+    {
+        public int Id { get; set; }
+        public int MadunatID { get; set; }
+        public DateTime Date { get; set; }
+        public bool IsSelected { get; set; }
 
+        // Navigation property to the associated order
+        public Madunaate  Madunaate { get; set; }
+        public string Status { get; set; } = "";
+        public DateTime? DateFree { get; set; }
+        public string? Paypalce { get; set; }
+    }
+
+     
 
     public class Category
     {
@@ -46,6 +65,7 @@ namespace Elhoot_HomeDevices.Data
         public string Name { get; set; }
 
         public int Count { get; set; }
+        public decimal? TotalPriceCount { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
@@ -82,6 +102,10 @@ namespace Elhoot_HomeDevices.Data
 
     public class Order
     {
+
+        
+
+
         [Key]
         public int Id { get; set; }
 
@@ -95,19 +119,38 @@ namespace Elhoot_HomeDevices.Data
         public decimal RestPrice { get; set; }
         public decimal Penfits { get; set; }
         public decimal PriceAfterBenfits { get; set; }
-        public decimal Peroid { get; set; }
-
+        public decimal PriceAfterpermonth { get; set; }
+        public int Peroid { get; set; }
+        [NotMapped]
+        public List<DateTime>? SelectedDates { get; set; }=new List<DateTime>();
         public Customer? Customer { get; set; }  
         [Required]
         public DateTime Startdate { get; set; }
         public DateTime Enddate { get; set; }
+        public DateTime PayerTime { get; set; }
+ 
 
-        [Required]
-        [Column(TypeName = "decimal(18, 2)")]
-        public decimal Total { get; set; }
+        public List<StoreDate>? DatesInRange { get; set; } = new List<StoreDate>();
+
+
+
+        public string? Comment { get; set; }
         
 
       //  public string Status { get; set; }
+    }
+
+   public class StoreDate
+    {
+        public int Id { get; set; }
+        [Required]
+        [ForeignKey("OrderId")]
+        public int OrderId { get; set; }
+        public DateTime Date { get; set; }
+        public bool IsSelected { get; set; }
+        public string? Statuse { get; set; } = ""; 
+        public DateTime? DateFree { get; set; }   
+        public string? Paypalce { get; set; }
     }
 
     public class OrderItem
@@ -137,6 +180,27 @@ namespace Elhoot_HomeDevices.Data
 
        
     }
+
+    public class Madunaate
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public decimal Money { get; set; }
+        public DateTime date { get; set; }
+        public decimal Pienfits { get; set; }
+        public int? CountMonth { get; set; }
+        public List<SelectedDate>? selectedDatesRange { get; set; } = new List<SelectedDate>();
+        
     }
+    public class Dayeenatey
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public decimal Money { get; set; }
+        public DateTime date { get; set; }
+        public decimal Pienfits { get; set; }
+
+    }
+}
 
 
